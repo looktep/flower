@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glowing Flowers</title>
+    <style>
+        body {
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .flower {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 5s infinite alternate ease-in-out;
+        }
+        .petal {
+            position: absolute;
+            width: 20px;
+            height: 40px;
+            background: radial-gradient(circle, yellow, orange);
+            border-radius: 50%;
+            box-shadow: 0 0 10px yellow;
+            animation: glow 2s infinite alternate;
+        }
+        .center {
+            width: 20px;
+            height: 20px;
+            background: yellow;
+            border-radius: 50%;
+            box-shadow: 0 0 15px yellow;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px yellow;
+            }
+            to {
+                box-shadow: 0 0 20px orange;
+            }
+        }
+        @keyframes float {
+            from {
+                transform: translateY(0px);
+            }
+            to {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createFlower() {
+            let flower = document.createElement("div");
+            flower.classList.add("flower");
+            document.body.appendChild(flower);
+            
+            let x = Math.random() * window.innerWidth;
+            let y = Math.random() * window.innerHeight;
+            
+            flower.style.left = `${x}px`;
+            flower.style.top = `${y}px`;
+            
+            for (let i = 0; i < 6; i++) {
+                let petal = document.createElement("div");
+                petal.classList.add("petal");
+                petal.style.transform = `rotate(${i * 60}deg) translateY(-15px)`;
+                flower.appendChild(petal);
+            }
+            
+            let center = document.createElement("div");
+            center.classList.add("center");
+            flower.appendChild(center);
+        }
+        
+        for (let i = 0; i < 20; i++) {
+            createFlower();
+        }
+    </script>
+</body>
+</html>
